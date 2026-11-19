@@ -278,7 +278,7 @@ export function TextualBodyView({
             <div
                 id={id}
                 className={rootClasses}
-                onClickCapture={vm.onRootClick}
+                onClick={vm.onRootClick}
                 dir="auto"
                 {...eventPresentationAttributes}
             >
@@ -294,7 +294,7 @@ export function TextualBodyView({
     }
 
     return (
-        <div id={id} className={rootClasses} onClickCapture={vm.onRootClick} {...eventPresentationAttributes}>
+        <div id={id} className={rootClasses} onClick={vm.onRootClick} {...eventPresentationAttributes}>
             {renderedBody}
             {urlPreviews}
         </div>

@@ -51,6 +51,7 @@ import SlashCommandHelpDialog from "../components/views/dialogs/SlashCommandHelp
 import { shouldShowComponent } from "../customisations/helpers/UIComponents";
 import { TimelineRenderingType } from "../contexts/RoomContext";
 import { type ViewRoomPayload } from "../dispatcher/payloads/ViewRoomPayload";
+import escapeHtml from "escape-html";
 import { htmlSerializeFromMdIfNeeded } from "../editor/serialize";
 import { leaveRoomBehaviour } from "../utils/leave-behaviour";
 import { MatrixClientPeg } from "../MatrixClientPeg";
@@ -73,7 +74,8 @@ export const Commands = [
         args: "<message>",
         description: _td("slash_command|spoiler"),
         runFn: function (cli, roomId, threadId, message = "") {
-            return successSync(ContentHelpers.makeHtmlMessage(message, `<span data-mx-spoiler>${message}</span>`));
+            const html = htmlSerializeFromMdIfNeeded(message, { forceHTML: true }) ?? escapeHtml(message);
+            return successSync(ContentHelpers.makeHtmlMessage(message, `<span data-mx-spoiler>${html}</span>`));
         },
         category: CommandCategories.messages,
     }),
